@@ -189,7 +189,8 @@ release/main.o: main.cpp ../../../Qt/5.7/mingw53_32/include/QtCore/QCoreApplicat
 		misc/data_forward_definition.h \
 		misc/data_3d.h \
 		pose/coordinate_frame.h \
-		pose/cartesian_position_2D.h
+		pose/cartesian_position_2D.h \
+		pose/cartesian_position_3D.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/main.o main.cpp
 
 release/cartesian_position_temp.o: pose/cartesian_position_temp.cpp pose/cartesian_position_temp.h \
