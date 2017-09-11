@@ -33,7 +33,7 @@ protected:
 };
 
 template<typename T>
-class PositionTest : public T
+class PositionTest
 {
 public:
 
@@ -150,12 +150,24 @@ int main(int argc, char *argv[])
 
     PositionTest<mace::pose::CartesianPosition_2D> test("TEST",1.0,2.0);
     PositionTest<mace::pose::CartesianPosition_2D> test2("TEST",1.0,2.0);
-    std::cout<<test.distanceTo(test2)<<std::endl;
+    std::cout<<test.state.distanceTo(test2.state)<<std::endl;
 //    PositionTest<mace::pose::CartesianPosition_2D> test3("TEST",test+test2);
 
     PositionTest<mace::pose::CartesianPosition_2D> test4 = test + test2;
 
-//    PositionTest<mace::pose::CartesianPosition_3D> test6(test4);
+    PositionTest<mace::pose::CartesianPosition_3D> test6("TEST",1.0,2.0,3.0);
+
+    mace::misc::Data2D test2D(1.0,2.0);
+    mace::misc::Data3D test3D(1.0,2.0,3.0);
+    if(test2D>test3D)
+        std::cout<<"It is in here"<<std::endl;
+
+    if(test3D<test2D)
+        std::cout<<"Test 2D is less than"<<std::endl;
+    else if(test3D==test2D)
+        std::cout<<"They are equal"<<std::endl;
+    else
+        std::cout<<"Test 2D is greater than"<<std::endl;
 
     //PositionTest<mace::pose::CartesianPosition_2D> test5 = <mace::pose::CartesianPosition_2D>test4
     List newList;

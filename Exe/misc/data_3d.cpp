@@ -80,9 +80,14 @@ Data3D operator - (const Data2D &lhs, const Data3D &rhs)
 //! \param rhs
 //! \return
 //!
-bool operator == (const Data2D &lhs, const Data3D &rhs)
+bool operator == (const Data3D &lhs, const Data2D &rhs)
 {
-    return lhs == rhs;
+    return lhs.get2DData() == rhs;
+}
+
+bool operator != (const Data3D &lhs, const Data2D &rhs)
+{
+    return lhs.get2DData() != rhs;
 }
 
 //!
@@ -91,9 +96,9 @@ bool operator == (const Data2D &lhs, const Data3D &rhs)
 //! \param rhs
 //! \return
 //!
-bool operator < (const Data2D &lhs, const Data3D &rhs)
+bool operator < (const Data3D &lhs, const Data2D &rhs)
 {
-    return lhs < rhs.get2DData();
+    return lhs.get2DData() < rhs;
 }
 
 //!
@@ -102,9 +107,19 @@ bool operator < (const Data2D &lhs, const Data3D &rhs)
 //! \param rhs
 //! \return
 //!
-bool operator > (const Data2D &lhs, const Data3D &rhs)
+bool operator > (const Data3D &lhs, const Data2D &rhs)
 {
-    return lhs > rhs.get2DData();
+    return lhs.get2DData() > rhs;
+}
+
+bool operator >= (const Data3D &lhs, const Data2D &rhs)
+{
+    return !(lhs.get2DData() < rhs);
+}
+
+bool operator <= (const Data3D &lhs, const Data2D &rhs)
+{
+    return !(lhs.get2DData() > rhs);
 }
 
 } //end of namespace misc

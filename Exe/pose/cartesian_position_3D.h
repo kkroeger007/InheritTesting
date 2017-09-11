@@ -32,8 +32,7 @@ public:
         this->position.setData(x,y,z);
     }
 
-    template <class DERIVED>
-    CartesianPosition_3D(const Position<DERIVED> &derived):
+    CartesianPosition_3D(const Position<misc::Data2D> &derived):
         Position(derived)
     {
 

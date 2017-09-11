@@ -220,7 +220,7 @@ public:
     //! \param rhs
     //! \return
     //!
-    bool operator != (const Data2D &rhs) {
+    bool operator != (const Data2D &rhs) const{
         return !(*this == rhs);
     }
 

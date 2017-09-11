@@ -138,7 +138,21 @@ public:
         return true;
     }
 
-    friend bool operator < (const Data2D &lhs, const Data3D &rhs);
+    friend bool operator < (const Data3D &lhs, const Data2D &rhs);
+
+
+    //!
+    //! \brief operator >=
+    //! \param rhs
+    //! \return
+    //!
+    bool operator >= (const Data3D &rhs) const
+    {
+        return !(*this < rhs);
+    }
+
+    friend bool operator >= (const Data3D &lhs, const Data2D &rhs);
+
 
     //!
     //! \brief operator >
@@ -147,10 +161,26 @@ public:
     //!
     bool operator > (const Data3D &rhs) const
     {
-        return !(*this < rhs);
+        if(!Data2D::operator >(rhs))
+            return false;
+        if(this->z <= rhs.z)
+            return false;
+        return true;
     }
 
-    friend bool operator > (const Data2D &lhs, const Data3D &rhs);
+    friend bool operator > (const Data3D &lhs, const Data2D &rhs);
+
+    //!
+    //! \brief operator <=
+    //! \param rhs
+    //! \return
+    //!
+    bool operator <= (const Data3D &rhs) const
+    {
+        return !(*this > rhs);
+    }
+
+    friend bool operator <= (const Data3D &lhs, const Data2D &rhs);
 
     //!
     //! \brief operator ==
@@ -170,16 +200,18 @@ public:
         return true;
     }
 
-    friend bool operator == (const Data2D &lhs, const Data3D &rhs);
+    friend bool operator == (const Data3D &lhs, const Data2D &rhs);
 
     //!
     //! \brief operator !=
     //! \param rhs
     //! \return
     //!
-    bool operator != (const Data3D &rhs) {
+    bool operator != (const Data3D &rhs) const {
         return !(*this == rhs);
     }
+
+    friend bool operator != (const Data3D &lhs, const Data2D &rhs);
 
     /** Assignment Operators */
 public:
