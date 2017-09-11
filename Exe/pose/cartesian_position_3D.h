@@ -81,6 +81,39 @@ public:
     }
 
 public:
+    void setCoordinateFrame(const LocalFrameType &desiredFrame)
+    {
+        this->frame = mace::pose::getCoordinateFrame(desiredFrame);
+    }
+
+    /** Arithmetic Operators */
+public:
+
+    //!
+    //! \brief operator +
+    //! \param that
+    //! \return
+    //!
+    CartesianPosition_3D operator + (const CartesianPosition_3D &that) const
+    {
+        CartesianPosition_3D newPoint(*this);
+        newPoint.data = this->data + that.data;
+        return newPoint;
+    }
+
+    //!
+    //! \brief operator -
+    //! \param that
+    //! \return
+    //!
+    CartesianPosition_3D operator - (const CartesianPosition_3D &that) const
+    {
+        CartesianPosition_3D newPoint(*this);
+        newPoint.data = this->data - that.data;
+        return newPoint;
+    }
+
+public:
 
     //!
     //! \brief distanceBetween2D

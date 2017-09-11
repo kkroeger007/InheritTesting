@@ -111,6 +111,7 @@ std::vector<std::string> to_string(const P1 &p1, const Param& ... param)
     return s;
 }
 
+
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
@@ -118,14 +119,17 @@ int main(int argc, char *argv[])
     mace::pose::PositionTest<mace::pose::CartesianPosition_2D> point2("TEST",0.0,1.0);
     mace::pose::PositionTest<mace::pose::CartesianPosition_2D> point3("TEST1",1.0,1.0);
     mace::pose::PositionTest<mace::pose::CartesianPosition_2D> point4("TEST",1.0,0.0);
-    mace::pose::PositionTest<mace::pose::CartesianPosition_2D> point5("TEST",-0.5,-0.5);
+    mace::pose::PositionTest<mace::pose::CartesianPosition_2D> point5("TEST",0.0,1.0);
 
     mace::geometry::PolygonBase<mace::pose::PositionTest<mace::pose::CartesianPosition_2D>> polygon;
     polygon.appendVertex(point1);
     polygon.appendVertex(point2);
     polygon.appendVertex(point3);
     polygon.appendVertex(point4);
-    std::cout<<"Was the point inside: "<<polygon.contains(point5)<<std::endl;
+    std::vector<mace::pose::PositionTest<mace::pose::CartesianPosition_2D>> vertices = polygon.getVector();
+    polygon.getBoundingRect();
+
+    std::cout<<"Was the point inside: "<<polygon.contains(point5,true)<<std::endl;
 
 //    std::cout<<test.distanceTo(test2)<<std::endl;
 //    test2 = test;

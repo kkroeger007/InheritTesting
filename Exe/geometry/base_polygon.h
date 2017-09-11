@@ -15,22 +15,38 @@ template <class T>
 class PolygonBase
 {
 public:
-    PolygonBase() = default;
+    PolygonBase(const std::string &descriptor = "Polygon"):
+        name(descriptor)
+    {
 
-    PolygonBase(const std::vector<T> &vector);
+    }
 
-    appendVertex(const T &vertex);
+    PolygonBase(const std::vector<T> &vector, const std::string &descriptor = "Polygon");
 
-    removeVertex(const int &index);
+    PolygonBase(const PolygonBase &copy);
 
-    size_t polygonSize() const;
+    void appendVertex(const T &vertex);
+
+    void removeVertex(const int &index);
+
+    void replaceVector(const std::vector<T> &vector);
 
     void clearPolygon();
 
-    bool contains(const T &point);
+    PolygonBase getBoundingRect() const;
 
+    size_t polygonSize() const;
+
+    bool contains(const T &point, const bool &onLineCheck = false);
+
+    std::vector<T> getVector()
+    {
+        return m_vertex;
+    }
 
 private:
+    std::string name;
+
     std::vector<T> m_vertex;
 
 };
