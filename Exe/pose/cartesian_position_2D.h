@@ -2,41 +2,103 @@
 #define CARTESIAN_POSITION_2D_H
 
 #include <iostream>
-
-#include "misc/data_2d.h"
+#include <cmath>
 
 #include "base_position.h"
 
 namespace mace{
 namespace pose {
 
-class CartesianPosition_2D : public Position<misc::Data2D>, public AbstractPosition<CartesianPosition_2D>
+class CartesianPosition_2D : public AbstractPosition<CartesianPosition_2D, misc::Data2D>, public CartesianPosition
 {
 public:
-    CartesianPosition_2D()
+    CartesianPosition_2D():
+        AbstractPosition(AbstractPosition::PositionType::CARTESIAN, CoordinateFrame::CF_LOCAL_ENU)
     {
         std::cout<<"Default cartesian position 2d constructor"<<std::endl;
-        this->setCoordinateFrame(CoordinateFrame::CF_LOCAL_ENU);
     }
 
     CartesianPosition_2D(const CartesianPosition_2D &copy):
-        Position(copy)
+        AbstractPosition(copy)
     {
 
     }
 
-    CartesianPosition_2D(const double x, const double &y)
+    CartesianPosition_2D(const double x, const double &y):
+        AbstractPosition(AbstractPosition::PositionType::CARTESIAN, CoordinateFrame::CF_LOCAL_ENU)
     {
-        this->setCoordinateFrame(CoordinateFrame::CF_LOCAL_ENU);
-        this->position.setData(x,y);
+        this->data.setData(x,y);
     }
 
-    template <class DERIVED>
-    CartesianPosition_2D(const Position<DERIVED> &derived):
-        Position(derived)
+public:
+    void updatePosition(const double &x, const double &y)
     {
-
+        this->data.setData(x,y);
     }
+
+    void setXPosition(const double &x)
+    {
+        this->data.setX(x);
+    }
+
+    void setYPosition(const double &y)
+    {
+        this->data.setY(y);
+    }
+
+    double getXPosition() const
+    {
+        return this->data.getX();
+    }
+
+    double getYPosition() const
+    {
+        return this->data.getY();
+    }
+
+    bool hasXBeenSet() const
+    {
+        return this->data.getDataXFlag();
+    }
+
+    bool hasYBeenSet() const
+    {
+        return this->data.getDataXFlag();
+    }
+
+public:
+    void setCoordinateFrame(const LocalFrameType &desiredFrame)
+    {
+        this->frame = mace::pose::getCoordinateFrame(desiredFrame);
+    }
+
+    /** Arithmetic Operators */
+public:
+
+    //!
+    //! \brief operator +
+    //! \param that
+    //! \return
+    //!
+    CartesianPosition_2D operator + (const CartesianPosition_2D &that) const
+    {
+        CartesianPosition_2D newPoint(*this);
+        newPoint.data = this->data + that.data;
+        return newPoint;
+    }
+
+    //!
+    //! \brief operator -
+    //! \param that
+    //! \return
+    //!
+    CartesianPosition_2D operator - (const CartesianPosition_2D &that) const
+    {
+        CartesianPosition_2D newPoint(*this);
+        newPoint.data = this->data - that.data;
+        return newPoint;
+    }
+
 
 public:
     //!
@@ -44,33 +106,21 @@ public:
     //! \param position
     //! \return
     //!
-    virtual double distanceBetween2D(const CartesianPosition_2D &pos) const
-    {
-        double deltaX = this->position.getX() - pos.position.getX();
-        double deltaY = this->position.getY() - pos.position.getY();
-        double distance = sqrt(pow(deltaX,2) + pow(deltaY,2));
-        return distance;
-    }
+    double distanceBetween2D(const CartesianPosition_2D &pos) const override;
 
     //!
     //! \brief distanceTo
     //! \param position
     //! \return
     //!
-    double distanceTo(const CartesianPosition_2D &pos) const
-    {
-        return this->distanceBetween2D(pos);
-    }
+    double distanceTo(const CartesianPosition_2D &pos) const override;
 
     //!
     //! \brief bearingTo
     //! \param position
     //! \return
     //!
-    virtual double bearingTo(const CartesianPosition_2D &pos) const
-    {
-
-    }
+    double bearingTo(const CartesianPosition_2D &pos) const override;
 
     //!
     //! \brief newPosition
@@ -78,28 +128,7 @@ public:
     //! \param bearing
     //! \return
     //!
-    virtual CartesianPosition_2D newPosition(const double &distance, const double &bearing) const
-    {
-
-    }
-
-    //!
-    //! \brief getCoordinateFrame
-    //! \return
-    //!
-    virtual CoordinateFrame getCoordinateFrame() const
-    {
-
-    }
-
-    //!
-    //! \brief isOfCoordinateFrame
-    //! \return
-    //!
-    virtual bool isOfCoordinateFrame(const CoordinateFrame &coordinateFrame) const
-    {
-
-    }
+    CartesianPosition_2D newPosition(const double &distance, const double &bearing) const override;
 };
 
 } //end of namespace pose

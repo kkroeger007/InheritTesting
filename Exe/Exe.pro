@@ -10,12 +10,11 @@ CONFIG -= app_bundle
 TEMPLATE = app
 
 SOURCES += main.cpp \
-    pose/cartesian_position_temp.cpp \
     pose/geodetic_posiiton.cpp \
     misc/data_2d.cpp \
     misc/data_3d.cpp \
     geometry/base_polygon.cpp \
-    pose/base_position.cpp
+    pose/cartesian_position_2d.cpp
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -33,11 +32,11 @@ HEADERS += \
     pose/base_position.h \
     pose/cartesian_position_2D.h \
     pose/cartesian_position_3D.h \
-    pose/cartesian_position_temp.h \
     pose/coordinate_frame.h \
     pose/geodetic_position.h \
     misc/abstract_data.h \
     misc/data_2d.h \
     misc/data_3d.h \
     misc/data_forward_definition.h \
-    geometry/base_polygon.h
+    geometry/base_polygon.h \
+    geometry/geometry_helper.h

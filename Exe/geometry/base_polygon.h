@@ -3,6 +3,10 @@
 
 #include <vector>
 #include <stdlib.h>
+#include "geometry_helper.h"
+
+#include "pose/cartesian_position_2D.h"
+#include "pose/cartesian_position_3D.h"
 
 namespace mace{
 namespace geometry{
@@ -11,7 +15,7 @@ template <class T>
 class PolygonBase
 {
 public:
-    PolygonBase();
+    PolygonBase() = default;
 
     PolygonBase(const std::vector<T> &vector);
 
@@ -22,6 +26,9 @@ public:
     size_t polygonSize() const;
 
     void clearPolygon();
+
+    bool contains(const T &point);
+
 
 private:
     std::vector<T> m_vertex;

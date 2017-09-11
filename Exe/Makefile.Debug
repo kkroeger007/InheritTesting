@@ -44,38 +44,35 @@ OBJECTS_DIR   = debug/
 ####### Files
 
 SOURCES       = main.cpp \
-		pose/cartesian_position_temp.cpp \
 		pose/geodetic_posiiton.cpp \
 		misc/data_2d.cpp \
 		misc/data_3d.cpp \
 		geometry/base_polygon.cpp \
-		pose/base_position.cpp 
+		pose/cartesian_position_2d.cpp 
 OBJECTS       = debug/main.o \
-		debug/cartesian_position_temp.o \
 		debug/geodetic_posiiton.o \
 		debug/data_2d.o \
 		debug/data_3d.o \
 		debug/base_polygon.o \
-		debug/base_position.o
+		debug/cartesian_position_2d.o
 
 DIST          =  pose/abstract_position.h \
 		pose/base_position.h \
 		pose/cartesian_position_2D.h \
 		pose/cartesian_position_3D.h \
-		pose/cartesian_position_temp.h \
 		pose/coordinate_frame.h \
 		pose/geodetic_position.h \
 		misc/abstract_data.h \
 		misc/data_2d.h \
 		misc/data_3d.h \
 		misc/data_forward_definition.h \
-		geometry/base_polygon.h main.cpp \
-		pose/cartesian_position_temp.cpp \
+		geometry/base_polygon.h \
+		geometry/geometry_helper.h main.cpp \
 		pose/geodetic_posiiton.cpp \
 		misc/data_2d.cpp \
 		misc/data_3d.cpp \
 		geometry/base_polygon.cpp \
-		pose/base_position.cpp
+		pose/cartesian_position_2d.cpp
 QMAKE_TARGET  = Exe
 DESTDIR        = debug/ #avoid trailing-slash linebreak
 TARGET         = Exe.exe
@@ -98,7 +95,7 @@ dist:
 	$(ZIP) Exe.zip $(SOURCES) $(DIST) Exe.pro ../../../Qt/5.7/mingw53_32/mkspecs/features/spec_pre.prf ../../../Qt/5.7/mingw53_32/mkspecs/qdevice.pri ../../../Qt/5.7/mingw53_32/mkspecs/features/device_config.prf ../../../Qt/5.7/mingw53_32/mkspecs/common/angle.conf ../../../Qt/5.7/mingw53_32/mkspecs/qconfig.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_3dcore.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_3dcore_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_3dextras.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_3dextras_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_3dinput.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_3dinput_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_3dlogic.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_3dlogic_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_3dquick.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_3dquick_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_3dquickextras.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_3dquickextras_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_3dquickinput.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_3dquickinput_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_3dquickrender.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_3dquickrender_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_3drender.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_3drender_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_axbase.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_axbase_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_axcontainer.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_axcontainer_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_axserver.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_axserver_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_bluetooth.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_bluetooth_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_bootstrap_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_clucene_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_concurrent.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_concurrent_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_core.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_core_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_dbus.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_dbus_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_designer.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_designer_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_designercomponents_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_gui.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_gui_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_help.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_help_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_location.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_location_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_multimedia.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_multimedia_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_multimediawidgets.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_multimediawidgets_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_network.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_network_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_nfc.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_nfc_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_opengl.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_opengl_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_openglextensions.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_openglextensions_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_packetprotocol_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_platformsupport_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_positioning.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_positioning_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_printsupport.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_printsupport_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_qml.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_qml_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_qmldebug_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_qmldevtools_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_qmltest.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_qmltest_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_qtmultimediaquicktools_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_quick.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_quick_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_quickcontrols2.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_quickcontrols2_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_quickparticles_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_quicktemplates2_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_quickwidgets.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_quickwidgets_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_sensors.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_sensors_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_serialport.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_serialport_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_sql.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_sql_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_svg.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_svg_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_testlib.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_testlib_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_uiplugin.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_uitools.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_uitools_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_webchannel.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_webchannel_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_websockets.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_websockets_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_widgets.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_widgets_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_winextras.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_winextras_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_xml.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_xml_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_xmlpatterns.pri ../../../Qt/5.7/mingw53_32/mkspecs/modules/qt_lib_xmlpatterns_private.pri ../../../Qt/5.7/mingw53_32/mkspecs/features/qt_functions.prf ../../../Qt/5.7/mingw53_32/mkspecs/features/qt_config.prf ../../../Qt/5.7/mingw53_32/mkspecs/features/win32/qt_config.prf ../../../Qt/5.7/mingw53_32/mkspecs/win32-g++/qmake.conf ../../../Qt/5.7/mingw53_32/mkspecs/features/spec_post.prf ../.qmake.stash ../../../Qt/5.7/mingw53_32/mkspecs/features/exclusive_builds.prf ../../../Qt/5.7/mingw53_32/mkspecs/features/toolchain.prf ../../../Qt/5.7/mingw53_32/mkspecs/features/default_pre.prf ../../../Qt/5.7/mingw53_32/mkspecs/features/win32/default_pre.prf ../../../Qt/5.7/mingw53_32/mkspecs/features/resolve_config.prf ../../../Qt/5.7/mingw53_32/mkspecs/features/exclusive_builds_post.prf ../../../Qt/5.7/mingw53_32/mkspecs/features/default_post.prf ../../../Qt/5.7/mingw53_32/mkspecs/features/build_pass.prf ../../../Qt/5.7/mingw53_32/mkspecs/features/win32/console.prf ../../../Qt/5.7/mingw53_32/mkspecs/features/qml_debug.prf ../../../Qt/5.7/mingw53_32/mkspecs/features/win32/rtti.prf ../../../Qt/5.7/mingw53_32/mkspecs/features/precompile_header.prf ../../../Qt/5.7/mingw53_32/mkspecs/features/warn_on.prf ../../../Qt/5.7/mingw53_32/mkspecs/features/qt.prf ../../../Qt/5.7/mingw53_32/mkspecs/features/resources.prf ../../../Qt/5.7/mingw53_32/mkspecs/features/moc.prf ../../../Qt/5.7/mingw53_32/mkspecs/features/file_copies.prf ../../../Qt/5.7/mingw53_32/mkspecs/features/testcase_targets.prf ../../../Qt/5.7/mingw53_32/mkspecs/features/exceptions.prf ../../../Qt/5.7/mingw53_32/mkspecs/features/yacc.prf ../../../Qt/5.7/mingw53_32/mkspecs/features/lex.prf Exe.pro ../../../Qt/5.7/mingw53_32/lib/Qt5Cored.prl  NO_PCH_SOURCES RESOURCES HEADERS SOURCES OBJECTIVE_SOURCES YACCSOURCES YACCSOURCES LEXSOURCES 
 
 clean: compiler_clean 
-	-$(DEL_FILE) debug/main.o debug/cartesian_position_temp.o debug/geodetic_posiiton.o debug/data_2d.o debug/data_3d.o debug/base_polygon.o debug/base_position.o
+	-$(DEL_FILE) debug/main.o debug/geodetic_posiiton.o debug/data_2d.o debug/data_3d.o debug/base_polygon.o debug/cartesian_position_2d.o
 
 distclean: clean 
 	-$(DEL_FILE) $(DESTDIR_TARGET)
@@ -184,24 +181,16 @@ debug/main.o: main.cpp ../../../Qt/5.7/mingw53_32/include/QtCore/QCoreApplicatio
 		../../../Qt/5.7/mingw53_32/include/QtCore/qeventloop.h \
 		pose/base_position.h \
 		pose/abstract_position.h \
-		misc/data_2d.h \
 		misc/abstract_data.h \
 		misc/data_forward_definition.h \
-		misc/data_3d.h \
 		pose/coordinate_frame.h \
-		pose/cartesian_position_2D.h \
-		pose/cartesian_position_3D.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/main.o main.cpp
-
-debug/cartesian_position_temp.o: pose/cartesian_position_temp.cpp pose/cartesian_position_temp.h \
 		misc/data_2d.h \
-		misc/abstract_data.h \
-		misc/data_forward_definition.h \
-		pose/base_position.h \
-		pose/abstract_position.h \
 		misc/data_3d.h \
-		pose/coordinate_frame.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/cartesian_position_temp.o pose/cartesian_position_temp.cpp
+		pose/cartesian_position_2D.h \
+		pose/cartesian_position_3D.h \
+		geometry/base_polygon.h \
+		geometry/geometry_helper.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/main.o main.cpp
 
 debug/geodetic_posiiton.o: pose/geodetic_posiiton.cpp pose/geodetic_position.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/geodetic_posiiton.o pose/geodetic_posiiton.cpp
@@ -217,17 +206,28 @@ debug/data_3d.o: misc/data_3d.cpp misc/data_3d.h \
 		misc/data_forward_definition.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/data_3d.o misc/data_3d.cpp
 
-debug/base_polygon.o: geometry/base_polygon.cpp geometry/base_polygon.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/base_polygon.o geometry/base_polygon.cpp
-
-debug/base_position.o: pose/base_position.cpp pose/base_position.h \
+debug/base_polygon.o: geometry/base_polygon.cpp geometry/base_polygon.h \
+		geometry/geometry_helper.h \
+		pose/cartesian_position_2D.h \
+		pose/base_position.h \
 		pose/abstract_position.h \
-		misc/data_2d.h \
 		misc/abstract_data.h \
 		misc/data_forward_definition.h \
+		pose/coordinate_frame.h \
+		misc/data_2d.h \
 		misc/data_3d.h \
-		pose/coordinate_frame.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/base_position.o pose/base_position.cpp
+		pose/cartesian_position_3D.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/base_polygon.o geometry/base_polygon.cpp
+
+debug/cartesian_position_2d.o: pose/cartesian_position_2d.cpp pose/cartesian_position_2D.h \
+		pose/base_position.h \
+		pose/abstract_position.h \
+		misc/abstract_data.h \
+		misc/data_forward_definition.h \
+		pose/coordinate_frame.h \
+		misc/data_2d.h \
+		misc/data_3d.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/cartesian_position_2d.o pose/cartesian_position_2d.cpp
 
 ####### Install
 

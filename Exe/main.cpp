@@ -8,6 +8,8 @@
 #include "pose/cartesian_position_2D.h"
 #include "pose/cartesian_position_3D.h"
 
+#include "geometry/base_polygon.h"
+
 #include <memory>
 
 class AbstractCommand{
@@ -32,41 +34,6 @@ protected:
     int value;
 };
 
-template<typename T>
-class PositionTest
-{
-public:
-
-    PositionTest() = default;
-
-    template <typename NEWT>
-    PositionTest(const PositionTest<NEWT> &ref):
-        state(ref.state)
-    {
-        std::cout<<"In the copy constuctor"<<std::endl;
-        //this->name = ref.name;
-    }
-
-    template<typename ... Arg>
-    PositionTest(const char *str, const Arg ... arg):
-        state(arg ...),
-        name(str)
-    {
-        std::cout<<"In the crazy constuctor"<<std::endl;
-    }
-
-    PositionTest operator + (const PositionTest &that) const
-    {
-        PositionTest newPos(*this);
-        newPos.state = this->state + that.state;
-        return newPos;
-    }
-
-public:
-    T state;
-private:
-    std::string name;
-};
 
 template <typename T>
 class SpecificCommand : public AbstractCommand
@@ -75,7 +42,7 @@ public:
 
     SpecificCommand() = default;
 
-    SpecificCommand(const PositionTest<T> &test):
+    SpecificCommand(const mace::pose::PositionTest<T> &test):
         AbstractCommand()
     {
         value += 1;
@@ -87,7 +54,7 @@ public:
     }
 
 private:
-    PositionTest<T> pos;
+    mace::pose::PositionTest<T> pos;
 };
 
 class List{
@@ -147,39 +114,56 @@ std::vector<std::string> to_string(const P1 &p1, const Param& ... param)
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
+    mace::pose::PositionTest<mace::pose::CartesianPosition_2D> point1("TEST1",0.0,0.0);
+    mace::pose::PositionTest<mace::pose::CartesianPosition_2D> point2("TEST",0.0,1.0);
+    mace::pose::PositionTest<mace::pose::CartesianPosition_2D> point3("TEST1",1.0,1.0);
+    mace::pose::PositionTest<mace::pose::CartesianPosition_2D> point4("TEST",1.0,0.0);
+    mace::pose::PositionTest<mace::pose::CartesianPosition_2D> point5("TEST",-0.5,-0.5);
 
-    PositionTest<mace::pose::CartesianPosition_2D> test("TEST",1.0,2.0);
-    PositionTest<mace::pose::CartesianPosition_2D> test2("TEST",1.0,2.0);
-    std::cout<<test.state.distanceTo(test2.state)<<std::endl;
+    mace::geometry::PolygonBase<mace::pose::PositionTest<mace::pose::CartesianPosition_2D>> polygon;
+    polygon.appendVertex(point1);
+    polygon.appendVertex(point2);
+    polygon.appendVertex(point3);
+    polygon.appendVertex(point4);
+    std::cout<<"Was the point inside: "<<polygon.contains(point5)<<std::endl;
+
+//    std::cout<<test.distanceTo(test2)<<std::endl;
+//    test2 = test;
+
+//    if(test>=test2)
+//        std::cout<<"It is in here"<<std::endl;
+
 //    PositionTest<mace::pose::CartesianPosition_2D> test3("TEST",test+test2);
 
-    PositionTest<mace::pose::CartesianPosition_2D> test4 = test + test2;
+//    PositionTest<mace::pose::CartesianPosition_2D> test4 = test + test2;
 
-    PositionTest<mace::pose::CartesianPosition_3D> test6("TEST",1.0,2.0,3.0);
+//    PositionTest<mace::pose::CartesianPosition_3D> test6("TEST",1.0,2.0,3.0);
 
-    mace::misc::Data2D test2D(1.0,2.0);
-    mace::misc::Data3D test3D(1.0,2.0,3.0);
-    if(test2D>test3D)
-        std::cout<<"It is in here"<<std::endl;
+//    mace::pose::CartesianPosition_2D test2D(1.0,2.0);
+//    mace::pose::CartesianPosition_3D test3D(1.0,2.0,3.0);
 
-    if(test3D<test2D)
-        std::cout<<"Test 2D is less than"<<std::endl;
-    else if(test3D==test2D)
-        std::cout<<"They are equal"<<std::endl;
-    else
-        std::cout<<"Test 2D is greater than"<<std::endl;
 
-    //PositionTest<mace::pose::CartesianPosition_2D> test5 = <mace::pose::CartesianPosition_2D>test4
-    List newList;
+//    if(test2D>test2D)
+//        std::cout<<"It is in here"<<std::endl;
 
-    std::shared_ptr<SpecificCommand<mace::pose::CartesianPosition_2D>> testSpecific = std::make_shared<SpecificCommand<mace::pose::CartesianPosition_2D>>(test);
-    testSpecific->testFunction(3);
-    newList.appendToVector(testSpecific);
-    std::shared_ptr<AbstractCommand> newPointer = newList.getFromVector();
-    SpecificCommand<mace::pose::CartesianPosition_2D> *testItem = newPointer->as<SpecificCommand<mace::pose::CartesianPosition_2D>>();
-    //std::shared_ptr<SpecificCommand<mace::pose::CartesianPosition_2D>> castItem = std::dynamic_pointer_cast<SpecificCommand<mace::pose::CartesianPosition_2D>>(newPointer);
+//    if(test2D<test2D)
+//        std::cout<<"Test 2D is less than"<<std::endl;
+//    else if(test2D==test2D)
+//        std::cout<<"They are equal"<<std::endl;
+//    else
+//        std::cout<<"Test 2D is greater than"<<std::endl;
 
-    std::cout<<"The program is complete"<<std::endl;
+//    PositionTest<mace::pose::CartesianPosition_2D> test5 = <mace::pose::CartesianPosition_2D>test4
+//    List newList;
+
+//    std::shared_ptr<SpecificCommand<mace::pose::CartesianPosition_2D>> testSpecific = std::make_shared<SpecificCommand<mace::pose::CartesianPosition_2D>>(test);
+//    testSpecific->testFunction(3);
+//    newList.appendToVector(testSpecific);
+//    std::shared_ptr<AbstractCommand> newPointer = newList.getFromVector();
+//    SpecificCommand<mace::pose::CartesianPosition_2D> *testItem = newPointer->as<SpecificCommand<mace::pose::CartesianPosition_2D>>();
+//    std::shared_ptr<SpecificCommand<mace::pose::CartesianPosition_2D>> castItem = std::dynamic_pointer_cast<SpecificCommand<mace::pose::CartesianPosition_2D>>(newPointer);
+
+//    std::cout<<"The program is complete"<<std::endl;
 //    const auto vec = to_string("hello", 1, 5.3);
 
 //    for (const auto &o : vec){

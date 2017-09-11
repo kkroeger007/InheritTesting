@@ -2,7 +2,6 @@
 #define DATA_2D_H
 
 #include <iostream>
-
 #include "abstract_data.h"
 
 namespace mace {
@@ -39,22 +38,6 @@ public:
         return false;
     }
 
-    /** Common among all point classes */
-public:
-
-    //!
-    //! \brief setData
-    //! \param data2D
-    //!
-    void setData(const Data2D &data2D);
-
-    //!
-    //! \brief setData
-    //! \param x
-    //! \param y
-    //!
-    void setData(const double &x, const double &y);
-
     //!
     //! \brief getDataYFlag
     //! \return
@@ -72,6 +55,22 @@ public:
     {
         return this->dataYFlag;
     }
+
+    /** Common among all point classes */
+public:
+
+    //!
+    //! \brief setData
+    //! \param data2D
+    //!
+    void setData(const Data2D &data2D);
+
+    //!
+    //! \brief setData
+    //! \param x
+    //! \param y
+    //!
+    void setData(const double &x, const double &y);
 
     //!
     //! \brief setX
